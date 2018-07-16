@@ -1,0 +1,87 @@
+{% extends "login/base.html" %}
+{% block title %}Production Manage{% endblock %}
+
+{% block content %}
+    <h1>车间动态化管理</h1>
+
+
+        <div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">导入Excel</a></div>
+
+
+    <table style="border: 1px solid #cccccc;border-collapse: collapse;;">
+        <thead ><tr style="font-weight: bold;"><th style="align: center;">生产车间实时动态化管理</th></tr></thead>
+        <tbody>
+
+
+        <tr>
+            <td style="border: 1px solid #cccccc" rowspan="2">序号
+        Item</td><td style="border: 1px solid #cccccc" rowspan="2">产品描述
+        Product description</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">产品型号
+        Part Number</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">计划产能
+        （PCS/天）
+        Planned Capacity (PCS/Day) </td>
+            <td style="border: 1px solid #cccccc" colspan="4">实际产能状况Actual capacity Time Frame
+        （时间段产能）</td>
+
+            <td style="border: 1px solid #cccccc" rowspan="2">实际产能
+        （PCS/天）
+        Actual Capacity (PCS/Day)</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">每班计划停机时间（小时）Scheduled downtime per shift</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">每班非计划停机损失时间（小时）Unscheduled downtime lost per shift</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">每班净生产时间
+        (小时）Net production time per shift</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">生产节拍
+        （秒/件）production takt</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">不良品
+        defective products</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">良品率
+        Yield Rate</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">每班达成率Completion ratio per shift</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">应出勤人数Attendance due</td>
+            <td style="border: 1px solid #cccccc" rowspan="2">实际出勤人数actual attendence</td>
+        </tr>
+
+        <tr>
+
+            <td style="border: 1px solid #cccccc">10:00</td>
+            <td style="border: 1px solid #cccccc">13:00</td>
+            <td style="border: 1px solid #cccccc">15:00</td>
+            <td style="border: 1px solid #cccccc">17:30</td>
+
+        </tr>
+
+
+
+
+        {% for record in lists %}
+            <tr>
+                <td style="border: 1px solid #cccccc">id:{{record.id}}</td>
+                <td style="border: 1px solid #cccccc">Product_description:{{record.Product_description}}</td>
+                <td style="border: 1px solid #cccccc">{{record.Part_Number}}</td>
+                <td style="border: 1px solid #cccccc">{{record.Planned_Capacity_per_day}}</td>
+                <td style="border: 1px solid #cccccc">{{record.Actual_capacity_until_eleven}}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Actual_capacity_until_thirteen }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Actual_capacity_until_fiveteen }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Actual_capacity_until_thrty_to_eighteen }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Actual_Capacity_per_day }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Scheduled_downtime_per_shirft }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Unscheduled_downtime_lost_per_shirft }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Net_production_time_per_shift }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.production_takt }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.defective_products }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Yield_Rate }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Completion_ratio_per_shift }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.Attendance_due }}</td>
+                <td style="border: 1px solid #cccccc">{{ record.actual_attendence }}</td>
+            </tr>
+
+        {% endfor %}
+        <tr><td>debug in manage{{ record }}</td></tr>
+
+
+        </tbody>
+    </table>
+
+{% endblock %}
