@@ -1,19 +1,19 @@
 {% extends "login/base.html" %}
 {% block title %}Production Dashboard{% endblock %}
 {% block content %}
-
+<!--
     <h3>车间动态化面板</h3>
-
+-->
     <!--
     <div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">导入Excel</a></div>
     -->
 
 
-    <table >
+    <table class="tb">     <!--    -->
         <thead>
 
 
-        <tr>
+        <tr class="row_high1">
 
             <th class="h" colspan="19">生产车间实时动态化看板</th>
 
@@ -22,42 +22,30 @@
         <tbody >
 
 
-        <tr>
+        <tr class="row_high2">
             <div class="hd">
-            <td  class='common_table' rowspan="2">序号
-                Item</td>
-            <td  class='common_table'  rowspan="2">产品描述
-            Product description</td>
-            <td  class='common_table'  rowspan="2">产品型号
-                Part Number</td>
-            <td  class='common_table'  rowspan="2">计划产能
-                （PCS/天）
-                Planned Capacity (PCS/Day) </td>
-            <td  class='table2'  colspan="4">实际产能状况Actual capacity Time Frame
-                （时间段产能）</td>
+            <td  class='common_table' rowspan="2">序号</td>
+            <td  class='common_table'  rowspan="2">产品描述</td>
+            <td  class='common_table'  rowspan="2">产品型号</td>
+            <td  class='common_table'  rowspan="2">计划产能(PCS/天)</td>
+            <td  class='table2'  colspan="4">实际产能状况(时间段产能)</td>
 
-            <td  class='common_table'  rowspan="2">实际产能
-                （PCS/天）
-                Actual Capacity (PCS/Day)</td>
+            <td  class='common_table'  rowspan="2">实际产能(PCS/天)</td>
                 <!--
-            <td  class='common_table'  rowspan="2">每班计划停机时间（小时）Scheduled downtime per shift</td>
+            <td  class='common_table'  rowspan="2">每班计划停机时间（小时）</td>
             <td  class='common_table'  rowspan="2">每班非计划停机损失时间（小时）Unscheduled downtime lost per shift</td>
             -->
-            <td  class='common_table'  rowspan="2">每班净生产时间
-                (小时）Net production time per shift</td>
-            <td  class='common_table'  rowspan="2">生产节拍
-                （秒/件）production takt</td>
-            <td  class='common_table'  rowspan="2">不良品
-                defective products</td>
-            <td  class='common_table'  rowspan="2">良品率
-                Yield Rate</td>
-            <td  class='common_table'  rowspan="2">每班达成率Completion ratio per shift</td>
-            <td  class='common_table'  rowspan="2">应出勤人数Attendance due</td>
-            <td  class='common_table'  rowspan="2">实际出勤人数actual attendence</td>
+            <td  class='common_table'  rowspan="2">每班净生产时间(小时)</td>
+            <td  class='common_table'  rowspan="2">生产节拍(秒/件)</td>
+            <td  class='common_table'  rowspan="2">不良品</td>
+            <td  class='common_table'  rowspan="2">良品率</td>
+            <td  class='common_table'  rowspan="2">每班达成率</td>
+            <td  class='common_table'  rowspan="2">应出勤人数</td>
+            <td  class='common_table'  rowspan="2">实际出勤人数</td>
             </div>
         </tr>
 
-        <tr>
+        <tr class="row_high3">
 
             <td class='table3'>10:00</td>
             <td class='table3'>13:00</td>
@@ -72,8 +60,8 @@
         {% for record in lists %}
 
 
-            <tr>
-                <td style="border: 1px solid #cccccc">{{record.id}}</td>
+            <tr class="row_high4">
+                <td style="border: 1px solid #cccccc;color: deepskyblue;font-family: fantasy">{{record.Item_id}}</td>
                 <td style="border: 1px solid #cccccc">{{record.Product_description}}</td>
                 <td style="border: 1px solid #cccccc;">{{ record.Part_Number }} </td>
                 <td style="border: 1px solid #cccccc">{{record.Planned_Capacity_per_day}}</td>

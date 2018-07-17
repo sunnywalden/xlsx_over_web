@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+#from __future__ import unicode_literals
 import sys
 from django.db import models
 from django.contrib import admin
@@ -6,16 +6,18 @@ from django.contrib import admin
 sys.getdefaultencoding()
 
 # Create your models here.
-class production(models.Model):
-    #Item = models.AutoField()
+
+
+class Production(models.Model):
+    Item_id = models.BigIntegerField(primary_key=True)
     Product_description = models.TextField()
     Part_Number = models.CharField(max_length=20)
-    Planned_Capacity_per_day = models.FloatField()
-    Actual_capacity_until_eleven = models.FloatField()
-    Actual_capacity_until_thirteen = models.FloatField()
-    Actual_capacity_until_fiveteen = models.FloatField()
-    Actual_capacity_until_thrty_to_eighteen = models.FloatField()
-    Actual_Capacity_per_day = models.FloatField()
+    Planned_Capacity_per_day = models.BigIntegerField()
+    Actual_capacity_until_eleven = models.BigIntegerField()
+    Actual_capacity_until_thirteen = models.BigIntegerField()
+    Actual_capacity_until_fiveteen = models.BigIntegerField()
+    Actual_capacity_until_thrty_to_eighteen = models.BigIntegerField()
+    Actual_Capacity_per_day = models.BigIntegerField()
     #Scheduled_downtime_per_shirft = models.FloatField()
     #Unscheduled_downtime_lost_per_shirft = models.FloatField()
     Net_production_time_per_shift = models.CharField(max_length=20)

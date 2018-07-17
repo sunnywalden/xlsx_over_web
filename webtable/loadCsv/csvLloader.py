@@ -1,5 +1,5 @@
 # --*-- coding:utf8 --*--
-from webtable.models import production
+from webtable.models import Production
 import xlrd
 
 
@@ -39,6 +39,7 @@ def loader(xlsx_file):
     #'Unscheduled_downtime_lost_per_shirft',
 
     headers = [
+        'Item_id',
         'Product_description',
         'Part_Number',
         'Planned_Capacity_per_day',
@@ -62,63 +63,70 @@ def loader(xlsx_file):
 
         r = {}
         # print(row,' of ',nrows - 2, ' rows')
-        for col in range(2, ncols):
+        for col in range(1, ncols):
             if not sheet.cell_value(rowx=row, colx=2):
                 break
             else:
                 # print(sheet.row_values(rowx=row))
                 # print(col,' of ',ncols, ' cols')
                 # print('col - 2:')
-                key = headers[col - 2]
+                key = headers[col - 1]
                 # print('key:',key)
-                if col == 2:
+                #if col == 2:
                     #r[key] = sheet.cell_value(rowx=row, colx=col).encode('utf-8')
-                    r[key] = sheet.cell_value(rowx=row, colx=col)
+                #    r[key] = sheet.cell_value(rowx=row, colx=col)
                     #print('debug in csv loader', r[key])
                 # elif col == 10:
                 #
                 #     r[key] = sheet.cell_value(rowx=row, colx=col)
                 #     #print('debug in csv loader of col 10:', r[key])
-                elif 4 <= col <= 12 and col != 10:
-                    r[key] = float(sheet.cell_value(rowx=row, colx=col))
+                if 4 <= col <= 12 and col != 10 or 15 <= col or col==1:
+                    r[key] = int(sheet.cell_value(rowx=row, colx=col))
                     #print('debug in csv loader of col 4 - 12:', r[key])
                 else:
-                    r[key] = sheet.cell_value(rowx=row, colx=col)
+                    if col == 13 or col == 14:
+                        print('debug before load in csvloader', ('%.2f' % sheet.cell_value(rowx=row, colx=col)))
+                        res = ('%.4f' % sheet.cell_value(rowx=row, colx=col))
+                        r[key] = res[2:4] + '.' + res[4:]  + '%'
+                    else:
+                        r[key] = sheet.cell_value(rowx=row, colx=col)
                 # print('r[key]:',key,r[key])
         if r:
             #print('debug in csv loader of r:', r)
             lists.append(r)
 
     # 首先，清空表
-    production.objects.all().delete()
+    Production.objects.all().delete()
 
     sqllist = []
     for cell in lists:
         # for header in headers:
-        Product_description = cell[headers[0]]
-        Part_Number = cell[headers[1]]
-        Planned_Capacity_per_day = cell[headers[2]]
-        Actual_capacity_until_eleven = cell[headers[3]]
-        Actual_capacity_until_thirteen = cell[headers[4]]
-        Actual_capacity_until_fiveteen = cell[headers[5]]
-        Actual_capacity_until_thrty_to_eighteen = cell[headers[6]]
-        Actual_Capacity_per_day = cell[headers[7]]
+        Item_id = cell[headers[0]]
+        Product_description = cell[headers[1]]
+        Part_Number = cell[headers[2]]
+        Planned_Capacity_per_day = cell[headers[3]]
+        Actual_capacity_until_eleven = cell[headers[4]]
+        Actual_capacity_until_thirteen = cell[headers[5]]
+        Actual_capacity_until_fiveteen = cell[headers[6]]
+        Actual_capacity_until_thrty_to_eighteen = cell[headers[7]]
+        Actual_Capacity_per_day = cell[headers[8]]
         #Scheduled_downtime_per_shirft = cell[headers[8]]
         #Unscheduled_downtime_lost_per_shirft = cell[headers[9]]
-        Net_production_time_per_shift = cell[headers[8]]
-        production_takt = cell[headers[9]]
-        defective_products = cell[headers[10]]
-        Yield_Rate = cell[headers[11]]
-        Completion_ratio_per_shift = cell[headers[12]]
-        Attendance_due = cell[headers[13]]
-        actual_attendence = cell[headers[14]]
+        Net_production_time_per_shift = cell[headers[9]]
+        production_takt = cell[headers[10]]
+        defective_products = cell[headers[11]]
+        Yield_Rate = cell[headers[12]]
+        Completion_ratio_per_shift = cell[headers[13]]
+        Attendance_due = cell[headers[14]]
+        actual_attendence = cell[headers[15]]
 
-        #print(Net_production_time_per_shift, production_takt)
+        #print('Yield_Rate', Yield_Rate)
+        #print('Completion_ratio_per_shift', Completion_ratio_per_shift)
 
         #product_description = Product_description.decode('utf-8')
         product_description = Product_description
 
-        sql = production(Product_description=product_description, Part_Number=Part_Number,
+        sql = Production(Item_id=Item_id, Product_description=product_description, Part_Number=Part_Number,
                          Planned_Capacity_per_day=Planned_Capacity_per_day,
                          Actual_capacity_until_eleven=Actual_capacity_until_eleven,
                          Actual_capacity_until_thirteen=Actual_capacity_until_thirteen,

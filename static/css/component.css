@@ -14,14 +14,9 @@
 }
 
 .logo{
-    width: 20px;
-    height: 20px;
-    padding: 30px;
-    color: silver;
-    /*color: #EEE; */
-    position: relative;
-    left: 0%;
-    top: 0%;
+    float: left;
+    width: 60%;
+    height: 60%;
 
 
 }
@@ -47,22 +42,79 @@
 	line-height: 20px;
 	padding:0 0 35px 0; 
 }
+
+
+table{
+    border: 1px solid #F1F1F1;
+    border-radius:1px; /*圆角设置属性*/
+
+    overflow:hidden;
+
+    border-top-left-radius:1em;
+    border-top-right-radius:1em;
+    border-bottom-right-radius:1em;
+    border-bottom-left-radius:1em;
+}
+
 .common_table{
 	border: 1px solid silver;
     row-span: 2;
 }
 
+
 .h {
     border: 1px solid silver;
     column-span: all;
     text-align: center;
+    font-size: xx-large;
+	font-family: "Heiti SC";
+	color: dodgerblue;
 }
 
+.tb{
+	width: 125%;
+	height: 80%;
+    text-align: center;
+    align-content: center;
+    border-radius: 5em;
+
+}
+
+.row_high1{
+    height: 15%;
+    text-align: center;
+    align-content: center;
+    border-style: dot-dot-dash;
+
+ }
+
+.row_high2{
+    text-align: center;
+    align-content: center;
+    color: deepskyblue;
+    font-family: "Xingkai SC";
+    font-size: large;
+}
+
+.row_high3{
+    text-align: center;
+    align-content: center;
+    color: cornflowerblue;
+    font-family: fantasy,"Monaco", "Courier New", Courier, monospace,"Times New Roman","Bitstream Vera Sans Mono";
+    font-size: large;
+}
+
+.row_high4{
+    text-align: center;
+    align-content: center;
+    color: #62b6ff;
+}
 
 .table1{
     text-align: center;
     column-span: all;
     border: 1px solid silver;
+	background-color: silver;
 }
 
 .table2{
