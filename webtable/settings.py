@@ -29,7 +29,7 @@ SECRET_KEY = '!a^eb90q+_k!l6=@anuc=$coc6vh1=za!rk0^7-7_)wqi@@8pi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', '192.168.1.0/24']
 
 
 # Application definition
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -84,6 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'productionDashboard.db'),
+        'NAME': os.path.join(BASE_DIR, 'user.db'),
 
     }
 }
@@ -115,13 +116,13 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 #LANGUAGE_CODE = 'ch-zh'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 DEFAULT_CHARSET = 'UTF-8'
 
@@ -137,3 +138,6 @@ STATICFILES_DIRS = (
     ('img',os.path.join(STATIC_ROOT,'static/img').replace('\\','/') ),
     ('upload',os.path.join(STATIC_ROOT,'static/upload').replace('\\','/') ),
 )
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'

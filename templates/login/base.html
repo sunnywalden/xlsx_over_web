@@ -10,9 +10,10 @@
     <link rel="stylesheet" type="text/css" href="../static/css/demo.css" />
     <!--必要样式-->
     <link rel="stylesheet" type="text/css" href="../static/css/component.css" />
-    <!--[if IE]>
 
-<![endif]-->
+    <!--[if IE]>
+    <script src="../static/js/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
 <div class="container demo-1">
@@ -24,8 +25,22 @@
 
     <div class="content">
         <div id="large-header" class="large-header">
-            <img  style="float:left;width:8%;height:9.6%" src="../static/img/logo.png"  alt="logo" /> <!-- class='logo' style="float:left;width:60%;height:60%"  -->
-            <canvas id="demo-canvas"></canvas>
+            {% block batton %}{% endblock %}
+        <!--
+            <img  style="float:left;width:8%;height:9.8%" src="../static/img/logo.png"  alt="logo" /> <!-- class='logo' style="float:left;width:60%;height:60%"  -->
+
+            <!--
+            <div class="mb2" style="float:right;"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF;width: 100%;height: 60%;">注销</a></div>
+            -->
+
+            <!--
+            <div class="mb2" style="float:right;"><input class="act-but submit" style="color: #FFFFFF;width: 100%;height: 60%" type="submit" value="注销"></div>
+            -->
+
+            <canvas id="demo-canvas" >
+
+            </canvas>
+
             <div class="logo_box">
 
                 {% block content %}{% endblock %}

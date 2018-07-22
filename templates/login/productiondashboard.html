@@ -1,12 +1,32 @@
 {% extends "login/base.html" %}
 {% block title %}Production Dashboard{% endblock %}
+
+
+{% block batton %}
+
+    <div class="mb2">
+        <form action="../userlogout/" name="f" method="post">
+        <input name="username" style="color: #FFFFFF;width: 15%;font-size: x-large;font-family: 'Apple Color Emoji';display:none" value="{{username}}">
+
+
+
+
+
+            <input style="font-size: large;border: transparent;color: #FFFFFF;float:right;background: rgba(74, 134, 232, 0.1);opacity: 30%;width: 10%;height: 60%;" type="submit" value="注销" href="/?next=/">
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </form>
+    </div>
+
+{% endblock %}
+
+
+
 {% block content %}
 <!--
     <h3>车间动态化面板</h3>
 -->
-    <!--
-    <div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">导入Excel</a></div>
-    -->
+
+
 
 
     <table class="tb">     <!--    -->
@@ -87,10 +107,7 @@
 
 
         {% endfor %}
-        <!--
 
-        <div>debug in dashboard {{ lists }}</div>
-        -->
 
         </tbody>
     </table>

@@ -3,7 +3,7 @@ import sys
 from django.db import models
 from django.contrib import admin
 
-sys.getdefaultencoding()
+#sys.getdefaultencoding()
 
 # Create your models here.
 
@@ -27,3 +27,12 @@ class Production(models.Model):
     Completion_ratio_per_shift = models.CharField(max_length=20)
     Attendance_due = models.BigIntegerField()
     actual_attendence = models.BigIntegerField()
+
+
+class User(models.Model):
+    User_id = models.AutoField(primary_key=True)
+    Username = models.CharField(max_length=40)
+    Email = models.EmailField()
+    Password = models.CharField(max_length=60)
+    LoginStatus = models.BooleanField(default=False)
+    LoginTime = models.DateTimeField()

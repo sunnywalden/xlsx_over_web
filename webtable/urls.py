@@ -23,15 +23,20 @@ from . import view
 urlpatterns = [
 
     path('admin/', admin.site.urls),
+    path('login/', view.login),
     url(r'^accounts/login/$',  login),
     url(r'^accounts/logout/$', logout),
     url(r'^query$', view.query),
-    url(r'^loader$', view.load),
-
+    path(r'loader/', view.load),
     url(r'^index/$', view.index),
-    url(r'^$', view.index),
-    # path('loader/', view.csvloader),
-    # path(r'^$', view.index),
+    url(r'^$', view.login),
+    path(r'userlogin/',  view.userlogin),
+    url(r'^userregistry$',  view.userregistry),
+    url(r'^registry$',  view.registry),
+    url(r'^login',  view.login),
+    url(r'^userlogout/$',  view.login),
+    url(r'userlogout/',  view.userlogout),
+
 ]
 
 

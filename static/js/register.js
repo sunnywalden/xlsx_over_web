@@ -1,4 +1,4 @@
-document.write("<script type='text/javascript' src='md5.min.js'></script>");
+document.write("<script type='text/javascript' src='/static/js/md5.min.js'></script>");
 
 function file(user,pass,file) {
     var fso;
@@ -24,9 +24,10 @@ function register() {
 
     var flag = true;
 
-    var username = document.getElementById("logname");
-    var pass1 = document.getElementById("logpass");
-    var pass2 = document.getElementById("logpass_again");
+    var username = document.getElementsByName("username").value;
+    var pass1 = document.getElementsByName("passwd").value;
+    var pass2 = document.getElementsByName("passwd_again").value;
+    alert("用户信息为'" + username + "，" + pass1);
 
     if ( pass1 == pass2 ) {
 
