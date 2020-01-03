@@ -2,3 +2,4 @@
 venv
 migrations
 !gitkeep
+db.sqlite3
