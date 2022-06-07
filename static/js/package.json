@@ -1,0 +1,22 @@
+{
+  "name": "xlsx_over_web",
+  "version": "1.0.0",
+  "description": "基于Django开发的excel表格页面化展示系统，自动将本地xlsx文件导入到Django自带的sqlite3数据库，显示到前端页面。",
+  "main": "EasePack.min.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnywalden/xlsx_over_web.git"
+  },
+  "keywords": [
+    "xlsx"
+  ],
+  "author": "sunnywalden@gmail.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sunnywalden/xlsx_over_web/issues"
+  },
+  "homepage": "https://github.com/sunnywalden/xlsx_over_web#readme"
+}
