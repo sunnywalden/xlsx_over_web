@@ -29,8 +29,7 @@ SECRET_KEY = '!a^eb90q+_k!l6=@anuc=$coc6vh1=za!rk0^7-7_)wqi@@8pi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '192.168.1.0/24']
-
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '192.168.1.0/24', 'localhost']
 
 # Application definition
 
@@ -42,10 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webtable',
+    'corsheaders',
     #'webtable.models.Production',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,13 +57,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 ROOT_URLCONF = 'webtable.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,14 +136,32 @@ DEFAULT_CHARSET = 'UTF-8'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../')
+# STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    ('css',os.path.join(STATIC_ROOT, 'static/css').replace('\\','/') ),
-    ('js',os.path.join(STATIC_ROOT,'static/js').replace('\\','/') ),
-    ('img',os.path.join(STATIC_ROOT,'static/img').replace('\\','/') ),
-    ('upload',os.path.join(STATIC_ROOT,'static/upload').replace('\\','/') ),
-)
+# STATICFILES_DIRS = (
+#     ('css',os.path.join(STATIC_ROOT, 'static/css').replace('\\','/') ),
+#     ('js',os.path.join(STATIC_ROOT,'static/js').replace('\\','/') ),
+#     ('img',os.path.join(STATIC_ROOT,'static/img').replace('\\','/') ),
+#     ('upload',os.path.join(STATIC_ROOT,'static/upload').replace('\\','/') ),
+# )
 
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/'
+APPEND_SLASH=False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}

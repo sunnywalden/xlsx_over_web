@@ -1,46 +1,38 @@
+import json
 from webtable.models import User
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
-import time
 import datetime
-from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 
 
 def user_registry(request):
-    userinfo = []
+    if request.method != "POST":
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
 
-    #User.objects.all().delete()
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
 
-    if request.method == "POST":
-        username = request.POST.get("username")
-        passwd = request.POST.get("passwd")
-        passwd_again = request.POST.get("passwd_again")
-        email = request.POST.get("email")
-        print('debug user info in user registery function:', username, email)
+    username = data.get("username")
+    passwd = data.get("password")
+    passwd_again = data.get("passwd_again")
+    email = data.get("email")
+    print('debug user info in user register function:', request.method, username, passwd, passwd_again, email)
 
-        if passwd == passwd_again:
-            tm = datetime.datetime.now()
-            logtime = tm.strftime("%Y-%m-%d %H:%M:%S")
-#            sql = User(Username=username, Password=make_password(passwd), Email=email, LoginStatus=False, LoginTime=logtime)
-            sql = User(Username=username, Password=passwd, Email=email, LoginStatus=False, LoginTime=logtime)
-            sql.save()
+    if passwd == passwd_again:
+        tm = datetime.datetime.now()
+        logtime = tm.strftime("%Y-%m-%d %H:%M:%S")
+        sql = User(username=username, password=make_password(passwd), email=email, login_status=False,
+                   login_time=logtime)
+        sql.save()
 
-            #users = User.objects.all()
-            users = User.objects.filter(Username=username)
-            for user in users:
-                print('debug user:', user.Username)
-
-                if user:
-                #return HttpResponseRedirect("../../templates/login/login.html")
-                    return True
-                else:
-                    return False
-        else:
-            return False
+        users = User.objects.filter(username=username)
+        for user in users:
+            print('debug user:', user.username)
+            if user:
+                return JsonResponse({'success': 'User registered successfully'})
+        return JsonResponse({'error': 'User registration failed'}, status=400)
     else:
-        return False
-
-
-
-if __name__ == '__main__':
-    user_registry(request)
+        return JsonResponse({'error': 'Passwords do not match'}, status=400)

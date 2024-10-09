@@ -1,5 +1,9 @@
 .idea
-venv
-migrations
+.github
+.venv
+migrations/*
 !gitkeep
 db.sqlite3
+*.db
+*.pyc
+*.pyo

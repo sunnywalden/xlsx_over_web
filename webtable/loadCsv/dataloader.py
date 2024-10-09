@@ -1,6 +1,6 @@
 # --*-- coding:utf8 --*--
+from django.shortcuts import HttpResponseRedirect, Http404, HttpResponse, render
 from webtable.models import Production
-from django.shortcuts import HttpResponseRedirect, Http404, HttpResponse, render_to_response, render
 
 lists = []
 

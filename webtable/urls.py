@@ -15,28 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url
-from django.contrib.auth.views import login, logout
+from django.urls import path, re_path
+from django.contrib.auth.views import LoginView, LogoutView
 from . import view
 
 urlpatterns = [
-
     path('admin/', admin.site.urls),
     path('login/', view.login),
-    url(r'^accounts/login/$',  login),
-    url(r'^accounts/logout/$', logout),
-    url(r'^query$', view.query),
-    path(r'loader/', view.load),
-    url(r'^index/$', view.index),
-    url(r'^$', view.login),
-    path(r'userlogin/',  view.userlogin),
-    url(r'^userregistry$',  view.userregistry),
-    url(r'^registry$',  view.registry),
-    url(r'^login',  view.login),
-    url(r'^userlogout/$',  view.login),
-    url(r'userlogout/',  view.userlogout),
-
+    re_path(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    re_path(r'^accounts/logout/$', LogoutView.as_view(), name='logout'),
+    re_path(r'^query$', view.query, name='query'),
+    path('loader/', view.load),
+    re_path(r'^index/$', view.index, name='index'),
+    re_path(r'^$', view.login, name='login'),
+    path('userlogin/', view.userlogin),
+    re_path(r'^userlogin$', view.userlogin, name='userlogin'),
+    re_path(r'^userregistry$', view.userregistry, name='userregistry'),
+    re_path(r'^registry$', view.registry, name='registry'),
+    re_path(r'^login', view.login, name='login'),
+    re_path(r'^userlogout/$', view.userlogout, name='userlogout'),
+    re_path(r'userlogout/', view.userlogout, name='userlogout'),
 ]
-
-
