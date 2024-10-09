@@ -40,6 +40,12 @@ python manage.py migrate
 
 ### 运行项目
 
+#### 前端·
+```shell
+npm run serve
+```
+
+#### 后端
 ```
 python manage.py runserver
 
